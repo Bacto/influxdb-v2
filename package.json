@@ -11,6 +11,7 @@
   "people": {
     "name": "Adrien Gillon"
   },
+  "keywords": [ "influxdb", "influxdb-v2", "influxdb-v2.0", "influx" ],
   "dependencies": {
     "node-fetch": "^2.6.0"
   },
