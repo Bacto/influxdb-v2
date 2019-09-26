@@ -1,0 +1,20 @@
+{
+  "name": "influxdb-v2",
+  "description": " InfluxDB 2.0 JavaScript client",
+  "version": "0.0.1",
+  "main": "src/index.js",
+  "license": "MIT",
+  "homepage": "https://github.com/bacto/influxdb-v2",
+  "bugs": {
+    "url": "https://github.com/bacto/influxdb-v2/issues"
+  },
+  "people": {
+    "name": "Adrien Gillon"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.1.0"
+  }
+}
