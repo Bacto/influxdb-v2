@@ -31,11 +31,28 @@ const Influxdb = require('influxdb-v2');
 (async () => {
 
   const influxdb = new Influxdb({
-    host: '', // [Required] your server IP or domain name, like `influxdb.example.com`
-    // protocol: 'https', // `http` or `https`, default to `https`
-    // port: 9999, // if different than 80 (for http) or 443 (for https). Probably 8086 or 9999.
-    token: '' // [Required] your InfluxDB token. You can create one in InfluxDB console in "Settings"/"Tokens"/"Generate".
+    host: 'influxdb.example.com',
+    token: 'myInfluxdbToken'
   });
+
+  await influxdb.write(
+    {
+      org: 'myOrganization',
+      bucket: 'myBucket'
+    },
+    [{
+      measurement: 'web',
+      fields: {
+        load: 12.34
+      }
+    }]
+  );
+
+  const result = await influxdb.query(
+    { org: 'myOrganization' },
+    { query: 'from(bucket: "myBucket") |> range(start: -1h)' }
+  );
+  console.log(result);
 
 })().catch(error => {
   console.error('\n🐞 An error occurred!', error);
