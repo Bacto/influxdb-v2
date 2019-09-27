@@ -1,6 +1,8 @@
 # InfluxDB-v2
 
-This library is created with simple goals in mind: be simple, efficient and easy to use.
+A light-weight library to write datas to InfluxDB v2 and query it.
+
+It is created with simple goals in mind: be simple, efficient and easy to use.
 
 **If you like it, please star it! 🥰**
 
@@ -11,14 +13,14 @@ This library is created with simple goals in mind: be simple, efficient and easy
 ## Sponsors
 
 `InfluxDB-v2` is sponsored by [Stackhero](https://www.stackhero.io/).
-If you are looking for a powerful managed InfluxDB server, you should seriously consider Stackhero 🤓
+If you are looking for powerful managed services, you should seriously consider Stackhero 🤓
 
 
 ## Installation
 
-With NPM: `$ npm install --save influxdb-v2`
+With NPM: `npm install --save influxdb-v2`
 
-With Yarn: `$ yarn add influxdb-v2`
+With Yarn: `yarn add influxdb-v2`
 
 
 ## Example
@@ -36,9 +38,7 @@ const Influxdb = require('influxdb-v2');
   });
 
 })().catch(error => {
-  console.error('');
-  console.error('🐞 An error occurred!');
-  console.error(error);
+  console.error('\n🐞 An error occurred!', error);
   process.exit(1);
 });
 ```

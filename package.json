@@ -1,7 +1,7 @@
 {
   "name": "influxdb-v2",
-  "description": " InfluxDB 2.0 JavaScript client",
-  "version": "0.0.1",
+  "description": "A light-weight library to write datas to InfluxDB v2 and query it.",
+  "version": "0.0.2",
   "main": "src/index.js",
   "license": "MIT",
   "homepage": "https://github.com/bacto/influxdb-v2",
