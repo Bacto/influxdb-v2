@@ -16,7 +16,7 @@ class Influxdb {
     if (port && !(port >= 1 && port <= 65535)) {
       throw Error('`port` should between 1 and 65535');
     }
-    this._port = port || this._protocol === 'https' ? 443 : 80;
+    this._port = port || (this._protocol === 'https' ? 443 : 80);
 
     if (!token) {
       throw Error('`token` is required');
