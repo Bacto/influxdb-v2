@@ -1,7 +1,7 @@
 {
   "name": "influxdb-v2",
   "description": "A light-weight library to write datas to InfluxDB v2 and query it.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "src/index.js",
   "license": "MIT",
   "homepage": "https://github.com/bacto/influxdb-v2",
@@ -16,6 +16,6 @@
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
-    "dotenv": "^8.1.0"
+    "dotenv": "^8.2.0"
   }
 }
