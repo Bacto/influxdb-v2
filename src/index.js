@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
 class Influxdb {
-  constructor({ host, protocol, port, token }) {
+  constructor({ host, protocol, port, token, fetchOptions = {} }) {
     if (!host) {
       throw Error('`host` is required');
     }
@@ -22,6 +22,7 @@ class Influxdb {
       throw Error('`token` is required');
     }
     this._token = token;
+    this._fetchOptions = fetchOptions;
   }
 
   async _fetch({ route, method, params, json, body, responseType }) {
@@ -38,7 +39,8 @@ class Influxdb {
           'Content-Type': json ? 'application/json' : 'text/plain; charset=utf-8',
           'Authorization': `Token ${this._token}`
         },
-        body: json ? JSON.stringify(body) : body
+        body: json ? JSON.stringify(body) : body,
+        ...this._fetchOptions
       });
 
 

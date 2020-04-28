@@ -73,6 +73,7 @@ const influxdb = new Influxdb({
   // protocol: 'https', // `http` or `https`, default to `https`
   // port: 443, // if different than 80 (for http) or 443 (for https). Probably 8086 or 9999.
   token: '' // [Required] your InfluxDB token. You can create one in InfluxDB console in "Settings"/"Tokens"/"Generate".
+  // fetchOptions: {} // Option passed to node-fetch
 });
 ```
 
@@ -252,4 +253,44 @@ console.log(result); // plain text (CSV) result
 
 
 */
+```
+
+
+### Handle self signed certificates
+
+
+`influxdb-v2` uses `fetch` to communicate with InfluxDB API.
+You can pass options to `fetch` using `fetchOptions` in the constructor.
+
+
+You can use a defined CA certificate like this:
+```javascript
+const https = require('https');
+
+const influxdb = new Influxdb({
+  host: '',
+  token: '',
+  fetchOptions: {
+    agent: new https.Agent({
+      ca: [ fs.readFileSync('yourCaFile.ca') ],
+    })
+  }
+});
+```
+
+
+You can ignore certificate checks too.
+⚠️ It is not recommended at all and expose your to MITM attacks!
+```javascript
+const https = require('https');
+
+const influxdb = new Influxdb({
+  host: '',
+  token: '',
+  fetchOptions: {
+    agent: new https.Agent({
+      rejectUnauthorized: false
+    })
+  }
+});
 ```
