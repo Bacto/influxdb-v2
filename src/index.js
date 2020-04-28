@@ -90,7 +90,7 @@ class Influxdb {
 
   async write({ org, orgID, bucket, precision }, lines) {
     const body = lines
-      .map(({ measurement, tags, fields, timestamp }) => {
+      .map(({ measurement, tags = {}, fields, timestamp }) => {
         const tagsString = Object.keys(tags)
           .map(tagKey => `,${tagKey}=${tags[tagKey]}`)
           .join('');
