@@ -26,14 +26,16 @@ require('dotenv').config();
       precision: 'ms'
     },
     [{
-      measurement: 'myMeasurement',
+      measurement: 'myMeasurement2',
       tags: {
         tagname1: 'myTagvalue1',
         tagname2: 'myTagvalue2'
       },
       fields: {
         fieldname1: 12.34,
-        fieldname2: 23.45
+        fieldname2: 23.45,
+        fieldname3: true,
+        fieldname4: 'string',
       },
       timestamp: Date.now()
     }]
