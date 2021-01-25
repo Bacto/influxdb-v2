@@ -93,17 +93,27 @@ class Influxdb {
   async write({ org, orgID, bucket, precision }, lines) {
     const body = lines
       .map(({ measurement, tags = {}, fields, timestamp }) => {
+        // For special characters, see https://docs.influxdata.com/influxdb/v2.0/reference/syntax/line-protocol/#special-characters
+
+        const escapeRegExp = string => string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&');
+        const escape = (text, characters) => {
+          for (const character of characters) {
+            text = text.replace(RegExp(escapeRegExp(character), 'g'), `\\${character}`);
+          }
+          return text;
+        };
+
         const tagsString = Object.keys(tags)
-          .map(tagKey => `,${tagKey}=${tags[tagKey]}`)
+          .map(tagKey => `,${escape(tagKey, [ ',', '=', ' ' ])}=${escape(tags[tagKey], [ ',', '=', ' ' ])}`)
           .join('');
 
         const fieldsString = Object.keys(fields)
-          .map(fieldKey => `${fieldKey}=${typeof(fields[fieldKey]) === 'string' ? `"${fields[fieldKey]}"` : fields[fieldKey]}`)
+          .map(fieldKey => `${escape(fieldKey, [ ',', '=', ' ' ])}=${typeof(fields[fieldKey]) === 'string' ? `"${escape(fields[fieldKey], [ '"', '\\' ])}"` : fields[fieldKey]}`)
           .join(',');
 
         timestamp = timestamp ? ' ' + timestamp : '';
         // `<measurement>[,<tag_key>=<tag_value>[,<tag_key>=<tag_value>]] <field_key>=<field_value>[,<field_key>=<field_value>] [<timestamp>]`
-        return `${measurement}${tagsString} ${fieldsString}${timestamp}`;
+        return `${escape(measurement, [ ',', ' ' ])}${tagsString} ${fieldsString}${timestamp}`;
       })
       .join('\n');
 
