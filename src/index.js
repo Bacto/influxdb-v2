@@ -108,7 +108,7 @@ class Influxdb {
           .join('');
 
         const fieldsString = Object.keys(fields)
-          .map(fieldKey => `${escape(fieldKey, [ ',', '=', ' ' ])}=${typeof(fields[fieldKey]) === 'string' ? `"${escape(fields[fieldKey], [ '"', '\\' ])}"` : fields[fieldKey]}`)
+          .map(fieldKey => `${escape(fieldKey, [ ',', '=', ' ' ])}=${typeof(fields[fieldKey]) === 'string' ? `"${escape(fields[fieldKey], [ '\\', '"' ])}"` : fields[fieldKey]}`)
           .join(',');
 
         timestamp = timestamp ? ' ' + timestamp : '';
